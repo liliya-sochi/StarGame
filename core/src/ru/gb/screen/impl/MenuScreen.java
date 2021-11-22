@@ -6,30 +6,34 @@ import com.badlogic.gdx.math.Vector2;
 import ru.gb.screen.BaseScreen;
 
 public class MenuScreen extends BaseScreen {
+    private Texture fon;
     private Texture img;
     private Vector2 touch;
-    private Vector2 v;
+    float x, y;
 
     @Override
     public void show() {
         super.show();
-        img = new Texture("badlogic.jpg");
+        fon = new Texture("fon-space.jpg");
+        img = new Texture("plane.png");
         touch = new Vector2();
-        v = new Vector2(1, 1);
     }
 
     @Override
     public void render(float delta) {
         super.render(delta);
+        if(x < touch.x) x = x + touch.x / 100;
+        if(y < touch.y) y = y + touch.y / 100;
         batch.begin();
-        batch.draw(img, touch.x, touch.y);
+        batch.draw(fon, 0, 0, 1920, 1080);
+        batch.draw(img, x, y);
         batch.end();
-        touch.add(v);
     }
 
     @Override
     public void dispose() {
         super.dispose();
+        fon.dispose();
         img.dispose();
     }
 
