@@ -1,45 +1,51 @@
 package ru.gb.screen.impl;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+
+import ru.gb.math.Rect;
 import ru.gb.screen.BaseScreen;
+import ru.gb.sprite.impl.Background;
 
 public class MenuScreen extends BaseScreen {
-    private Texture fon;
     private Texture img;
-    private Vector2 touch;
-    float x, y;
+    private Texture bg;
+    private Vector2 pos;
+    private Background background;
 
     @Override
     public void show() {
         super.show();
-        fon = new Texture("fon-space.jpg");
-        img = new Texture("plane.png");
-        touch = new Vector2();
+        img = new Texture("my/plane.png");
+        bg = new Texture("textures/bg.png");
+        pos = new Vector2();
+        background = new Background(bg);
+    }
+
+    @Override
+    public void resize(Rect worldBounds) {
+        super.resize(worldBounds);
+        background.resize(worldBounds);
     }
 
     @Override
     public void render(float delta) {
         super.render(delta);
-        if(x < touch.x) x = x + touch.x / 100;
-        if(y < touch.y) y = y + touch.y / 100;
         batch.begin();
-        batch.draw(fon, 0, 0, 1920, 1080);
-        batch.draw(img, x, y);
+        background.draw(batch);
         batch.end();
     }
 
     @Override
     public void dispose() {
         super.dispose();
-        fon.dispose();
         img.dispose();
+        bg.dispose();
     }
 
     @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        touch.set(screenX, Gdx.graphics.getHeight() - screenY);
-        return super.touchDown(screenX, screenY, pointer, button);
+    public boolean touchDown(Vector2 touch, int pointer, int button) {
+        pos.set(touch);
+        return super.touchDown(touch, pointer, button);
     }
 }
