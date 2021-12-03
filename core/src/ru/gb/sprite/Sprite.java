@@ -3,7 +3,6 @@ package ru.gb.sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-
 import ru.gb.math.Rect;
 import ru.gb.util.Regions;
 
@@ -12,6 +11,11 @@ public class Sprite extends Rect {
     protected float scale = 1f;
     protected TextureRegion[] regions;
     protected int frame;
+    private boolean destroyed;
+
+    public Sprite() {
+
+    }
 
     public Sprite(TextureRegion region) {
         regions = new TextureRegion[1];
@@ -73,5 +77,17 @@ public class Sprite extends Rect {
 
     public void setScale(float scale) {
         this.scale = scale;
+    }
+
+    public void destroy() {
+        this.destroyed = true;
+    }
+
+    public void flushDestroy() {
+        this.destroyed = false;
+    }
+
+    public boolean isDestroyed() {
+        return destroyed;
     }
 }
