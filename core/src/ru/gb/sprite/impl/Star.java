@@ -8,7 +8,7 @@ import ru.gb.sprite.Sprite;
 
 public class Star extends Sprite {
     private Rect worldBounds;
-    private final Vector2 v;
+    protected final Vector2 v;
 
     public Star(TextureAtlas atlas) {
         super(atlas.findRegion("star"));
@@ -32,7 +32,7 @@ public class Star extends Sprite {
         checkBounds();
     }
 
-    private void checkBounds() {
+    protected void checkBounds() {
         if (getRight() < worldBounds.getLeft()) {
             setLeft(worldBounds.getRight());
         }

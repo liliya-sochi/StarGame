@@ -21,7 +21,7 @@ public class ButtonPlay extends BaseButton {
     public void resize(Rect worldBounds) {
         super.resize(worldBounds);
         setHeightProportion(HEIGHT);
-        setRight(worldBounds.getLeft() + MARGIN);
+        setRight(worldBounds.getLeft() + MARGIN * 8);
         setBottom(worldBounds.getBottom() + MARGIN);
     }
 
